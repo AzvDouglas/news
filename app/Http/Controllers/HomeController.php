@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $noticias = Noticia::paginate(6);
+        $noticias = Noticia::orderBy('created_at', 'desc')->paginate(6);
+        //dd($noticias);
         return view('home', compact('noticias'));
     }
 }
