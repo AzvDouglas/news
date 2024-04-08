@@ -17,7 +17,8 @@
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <!-- Notícias -->
             @foreach($noticias as $noticia)
-                @livewire('noticia', ['titulo' => $noticia['titulo'], 'descricao' => $noticia['descricao'], 'imagem' => $noticia['imagem']])
+            <!-- Renderiza o componente Noticia com a instância do modelo Noticia -->
+            <livewire:noticia :noticia="$noticia" :key="$noticia->id" />
             @endforeach
         </div>
         <div class="m-8">

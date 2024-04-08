@@ -3,19 +3,17 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Noticia as NoticiaModel;
 
 class Noticia extends Component
 {
-    public $titulo;
-    public $descricao;
-    public $imagem;
+    public $noticia;
 
-    public function mount($titulo, $descricao, $imagem)
+    public function mount(NoticiaModel $noticia)
     {
-        $this->titulo = $titulo;
-        $this->descricao = $descricao;
-        $this->imagem = $imagem;
+        $this->noticia = $noticia;
     }
+
     public function render()
     {
         return view('livewire.noticia');
