@@ -12,11 +12,9 @@ class NoticiaController extends Controller
 {
     public function index()
     {
-        // Recupera todas as notícias do usuário logado
         $user = Auth::user();
         $noticias = $user->noticias;
-
-        // Retorna a view do dashboard com as notícias do usuário
         return view('dashboard', compact('noticias'));
     }
 }
+//                    @foreach(auth()->user()->noticias as $noticia)

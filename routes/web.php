@@ -10,10 +10,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('noticias', NoticiaController::class);
 });
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
