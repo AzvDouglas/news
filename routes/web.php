@@ -8,6 +8,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('noticias', NoticiaController::class);
+    Route::get('/dashboard', [NoticiaController::class, 'index'])->name('dashboard');
 });
 
 Route::view('profile', 'profile')

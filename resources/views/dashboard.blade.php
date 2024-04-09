@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Lista de Notícias') }}
-        </h2>
+        <div class="flex justify-between">
+            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                {{ __('Lista de Notícias') }}
+            </h2>
+            <button
+                class="inline-block px-4 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">
+                    Cadastrar Notícia
+            </button>
+        </div>
     </x-slot>
 
     <div class="py-10 bg-slate-600">
@@ -49,8 +55,8 @@
                                     <!-- Action buttons -->
                                     <button
                                         class="inline-block px-4 text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-700"
-                                        {{-- onclick="openModal('{{ route('noticia.show', [$noticia]) }}')" --}}
-                                        >Detalhes
+                                        {{-- onclick="openModal('{{ route('noticia.show', [$noticia]) }}')"
+                                        --}}>Detalhes
                                     </button>
 
                                     <a href="#"
@@ -58,8 +64,7 @@
                                         Editar
                                     </a>
 
-                                    <form method="POST"
-                                        action="#"
+                                    <form method="POST" action="#"
                                         onsubmit="return confirm('Tem certeza que deseja excluir?')">
                                         @csrf
                                         @method('DELETE')
