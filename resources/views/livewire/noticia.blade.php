@@ -7,7 +7,7 @@
 
     <!-- Adicionando a data de criação e o nome do autor -->
     <div class="mt-4 text-sm text-gray-500">
-        <p>Data de Criação: {{ $noticia->created_at }}</p>
         <p>Autor: {{ $noticia->user->name }}</p>
+        <p>{{ $noticia->created_at->locale('pt-BR')->diffForHumans() }}</p>
     </div>
 </div>
