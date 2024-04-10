@@ -4,13 +4,15 @@
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                 {{ __('Lista de Notícias') }}
             </h2>
-            <button
-                class="inline-block px-4 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">
-                    Cadastrar Notícia
+            <button wire:click="openModal" class="inline-block px-4 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">
+                Cadastrar Notícia
             </button>
+            
         </div>
     </x-slot>
 
+    @livewire('create-noticia')
+    
     <div class="py-10 bg-slate-600">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
