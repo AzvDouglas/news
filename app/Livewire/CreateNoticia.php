@@ -8,19 +8,16 @@ class CreateNoticia extends Component
 {
     public $showModal = false;
 
-    public function render()
-    {
-        return view('livewire.create-noticia');
-    }
-
-    public function openModal()
+    public function showCreateModal()
     {
         $this->showModal = true;
     }
 
-    public function closeModal()
+    // Outros métodos e lógica do componente...
+
+    public function render()
     {
-        $this->showModal = false;
+        return view('livewire.create-noticia');
     }
 
     public function salvarNoticia()

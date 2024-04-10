@@ -16,5 +16,20 @@ class NoticiaController extends Controller
         $noticias = $user->noticias;
         return view('dashboard', compact('noticias'));
     }
+
+    public function create()
+    {
+        $user = Auth::user();
+        $noticia = new Noticia();
+        return view('noticia.create', compact('noticia', 'user'));
+    }
+
+    public function edit(Noticia $noticia)
+    {
+        return view('noticia.edit', compact('noticia'));
+    }
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
-//                    @foreach(auth()->user()->noticias as $noticia)

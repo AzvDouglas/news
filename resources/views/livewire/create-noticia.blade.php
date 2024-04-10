@@ -1,24 +1,29 @@
-<div x-data="{ showModal: @entangle('showModal') }">
-    <div x-show="showModal" class="fixed inset-0 z-10 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+            {{ __('Criar Nova Notícia') }}
+        </h2>
+    </x-slot>
 
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
-            <div x-show="showModal" class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <!-- Conteúdo do modal de criação de notícias aqui -->
-                <form wire:submit.prevent="criarNoticia">
-                    <!-- Campos do formulário de criação de notícias -->
-                </form>
-
-                <div class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button @click="showModal = false" type="button" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Fechar
-                    </button>
+    <div class="py-10">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-600">
+                    <!-- Seu conteúdo aqui -->
+                    <form action="{{ route('salvar-noticia') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="titulo" class="block text-sm font-medium text-gray-700">Título</label>
+                            <input type="text" name="titulo" id="titulo" class="w-full p-2 mt-1 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="mb-4">
+                            <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
+                            <textarea name="descricao" id="descricao" class="w-full p-2 mt-1 border border-gray-300 rounded-md" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="inline-block px-4 py-2 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">Salvar Notícia</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</x-app-layout>

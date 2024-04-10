@@ -1,17 +1,25 @@
-<x-app-layout>
+<x-app-layout
+    x-data="{ open: false }">
     <x-slot name="header">
         <div class="flex justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
                 {{ __('Lista de Notícias') }}
             </h2>
-            <button wire:click="openModal" class="inline-block px-4 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">
-                Cadastrar Notícia
+            <button
+                class="inline-block px-4 text-white transition duration-300 bg-green-500 rounded-md hover:bg-green-700">
+            <a href="{{ route('create-noticia') }}">Criar Notícia</a>
             </button>
             
         </div>
     </x-slot>
 
-    @livewire('create-noticia')
+    <div x-show="open">
+
+        <div id="modal-exemplo">
+            @livewire('modal-exemplo')
+        </div>
+        
+    </div>
     
     <div class="py-10 bg-slate-600">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -61,7 +69,7 @@
                                         --}}>Detalhes
                                     </button>
 
-                                    <a href="#"
+                                    <a href="{{ route('noticias.edit', $noticia->id) }}"
                                         class="inline-block px-4 mx-1 text-white transition duration-300 bg-yellow-500 rounded-md hover:bg-yellow-700">
                                         Editar
                                     </a>
