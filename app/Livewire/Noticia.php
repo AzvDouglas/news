@@ -18,4 +18,10 @@ class Noticia extends Component
     {
         return view('livewire.noticia');
     }
+
+    public function save()
+    {
+        dd("Chegou no save!!!");
+ 
+    }
 }
