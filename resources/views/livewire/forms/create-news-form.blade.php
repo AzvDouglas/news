@@ -5,21 +5,21 @@
         <div class="mb-4">
             <label for="titulo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Título:</label>
             <input type="text" wire:model="titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
-            @error('form.titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+            @error('titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- Descrição -->
         <div class="mb-4">
             <label for="descricao" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Descrição:</label>
             <textarea wire:model="descricao" id="descricao" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300"></textarea>
-            @error('form.descricao') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+            @error('descricao') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
-        <!-- Imagem -->
+        <!-- Upload de Imagem via url -->
         <div class="mb-4">
             <label for="imagem" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Imagem:</label>
             <input type="file" wire:model="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
-            @error('form.imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+            @error('imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- Botões -->

@@ -17,11 +17,19 @@ class CreateNewsForm extends Component
 
     public function save()
     {
-        //
+        // Verifique se a $imagem é um arquivo enviado ou uma URL
+        if ($this->imagem instanceof \Illuminate\Http\UploadedFile) {
+            $imagemPath = $this->imagem->store('imagens', 'public');
+        } else {
+            // Se for uma URL, use-a diretamente como caminho da imagem
+            $imagemPath = $this->imagem;
+        }
+        //dd($imagemPath);
+
         Noticia::create([
             'titulo' => $this->titulo,
             'descricao' => $this->descricao,
-            'imagem' => $this->imagem->store('imagens', 'public'),
+            'imagem' => $imagemPath,
             'user_id' => auth()->user()->id,
         ]);
 
