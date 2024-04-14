@@ -4,6 +4,7 @@ namespace App\Livewire\Forms;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Http\UploadedFile;
 use App\Models\Noticia;
 
 class CreateNewsForm extends Component
@@ -17,14 +18,11 @@ class CreateNewsForm extends Component
 
     public function save()
     {
-        // Verifique se a $imagem é um arquivo enviado ou uma URL
-        if ($this->imagem instanceof \Illuminate\Http\UploadedFile) {
+        if ($this->imagem instanceof UploadedFile) {
             $imagemPath = $this->imagem->store('imagens', 'public');
         } else {
-            // Se for uma URL, use-a diretamente como caminho da imagem
             $imagemPath = $this->imagem;
         }
-        //dd($imagemPath);
 
         Noticia::create([
             'titulo' => $this->titulo,
