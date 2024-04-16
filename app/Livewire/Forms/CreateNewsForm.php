@@ -14,7 +14,7 @@ class CreateNewsForm extends Component
     public $titulo;
     public $descricao;
     public $imagem;
-    public Noticia $noticia;
+    //public Noticia $noticia;
 
     protected $rules = [
         'titulo' => 'required|min:3',
@@ -61,7 +61,7 @@ class CreateNewsForm extends Component
     
             return $this->redirect('/dashboard');
         } catch (\Exception $e) {
-            session()->flash('error', 'Ocorreu um erro ao criar a notícia. Por favor, tente novamente.');
+            session()->flash('error', 'Ocorreu um erro ao criar a notícia. Por favor, tente novamente.' . PHP_EOL . $e);
                 return $this->redirect('/dashboard');
         }
     }

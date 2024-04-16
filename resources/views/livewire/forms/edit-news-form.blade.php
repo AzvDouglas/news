@@ -1,28 +1,30 @@
-<div @keydown.escape.window="createNews = false"
-    class="fixed w-full max-w-xl p-6 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2 dark:bg-gray-800">
-    <button type="button" @click="createNews = false" class="absolute top-0 right-0 p-3 text-red-500 focus:outline-none">
+<!-- components/forms/edit-news-form.blade.php -->
+
+<div  @keydown.escape.window="editNews = false"
+	class="fixed w-full max-w-xl p-6 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2 dark:bg-gray-800">
+	<button type="button" @click="editNews = false" class="absolute top-0 right-0 p-3 text-red-500 focus:outline-none">
         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
     </button>
     <div class="mb-8 text-center">
         <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
-            Cadastrar Notícia
+            Editar Notícia
         </h1>
     </div>    <!-- Formulário blurwire -->
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="update">
         <!-- Título -->
         <div class="mb-4">
             <label for="titulo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Título:</label>
-            <input type="text" wire:model.blur="titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
-            @error('titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+            <input type="text" wire:model="noticia.titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300" value="{{ $noticia->titulo }}">
+            @error('noticia.titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- Descrição -->
         <div class="mb-4">
             <label for="descricao" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Descrição:</label>
-            <textarea wire:model.blur="descricao" id="descricao" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300"></textarea>
-            @error('descricao') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
+            <textarea wire:model="noticia.descricao" id="descricao" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">{{ $noticia->descricao }}</textarea>
+            @error('noticia.descricao') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
       
         <div class="mb-4"
@@ -40,28 +42,28 @@
             <!-- Upload de arquivo de Imagem -->
             <div class="mb-4" x-show="fileUpload">
                 <label for="imagem" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Imagem:</label>
-                <input type="file" wire:model.blur="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+                <input type="file" wire:model="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
                 @error('imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
             </div>
 
             <!-- Upload de Imagem via URL -->
             <div class="mb-4"  x-show="!fileUpload">
                 <label for="imagem" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">URL da Imagem:</label>
-                <input type="text" wire:model.blur="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300" placeholder="Cole aqui o link da imagem da sua notícia">
+                <input type="text" wire:model="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300" placeholder="Cole aqui o link da nova imagem">
                 @error('imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>
         
         <!-- Botões -->
         <div class="flex justify-between">
-			<button type="submit" class="px-6 py-2 text-sm font-bold bg-green-800 rounded-md shadow-sm text-green- hover:bg-green-700 hover:text-white focus:outline-none focus:shadow-outline-green active:bg-blue-800">
+			<button type="submit" class="px-6 py-2 text-sm font-bold text-black bg-green-800 rounded-md shadow-sm text-green- hover:bg-green-700 hover:text-white focus:outline-none focus:shadow-outline-green active:bg-blue-800">
 				<i class="fa-classic fa-solid fa-floppy-disk"></i>
 				Salvar
 			</button>
 			
 			
 			
-			<button type="button" @click="createNews = !createNews" class="px-6 py-2 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-700 focus:outline-none focus:shadow-outline-red active:bg-red-800">
+			<button type="button" @click="editNews = !editNews" class="px-6 py-2 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-700 focus:outline-none focus:shadow-outline-red active:bg-red-800">
 				Cancelar
 			</button>
         </div>
