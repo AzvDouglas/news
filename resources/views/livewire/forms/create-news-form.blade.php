@@ -1,10 +1,14 @@
 <div class="fixed w-full max-w-xl p-6 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2 dark:bg-gray-800">
-    <!-- Formulário blurwire -->
+    <div class="mb-8 text-center">
+        <h1 class="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+            Cadastrar Notícia
+        </h1>
+    </div>    <!-- Formulário blurwire -->
     <form wire:submit.prevent="save">
         <!-- Título -->
         <div class="mb-4">
             <label for="titulo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Título:</label>
-            <input type="text" wire:model="titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+            <input type="text" wire:model.blur="titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
             @error('titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
@@ -30,14 +34,14 @@
             <!-- Upload de arquivo de Imagem -->
             <div class="mb-4" x-show="fileUpload">
                 <label for="imagem" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Imagem:</label>
-                <input type="file" wire:model="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+                <input type="file" wire:model.blur="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
                 @error('imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
             </div>
 
             <!-- Upload de Imagem via URL -->
             <div class="mb-4"  x-show="!fileUpload">
                 <label for="imagem" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">URL da Imagem:</label>
-                <input type="text" wire:model="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+                <input type="text" wire:model.blur="imagem" id="imagem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
                 @error('imagem') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
             </div>
         </div>

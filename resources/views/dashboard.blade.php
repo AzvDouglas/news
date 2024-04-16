@@ -43,7 +43,22 @@
             </div>
             
             
-            
+            @if (session()->has('message'))
+            <div class="p-4 mb-6 text-center text-white bg-green-400 rounded-lg bg-opacity-900 flash-message">
+                {{ session('message') }}
+            </div>
+            @endif
+            @if(session('success'))
+            <div class="text-green-500 flash-message">
+                {{ session('success') }}
+            </div>
+            @endif
+        
+            @if(session('error'))
+            <div class="text-red-500 flash-message">
+                {{ session('error') }}
+            </div>
+            @endif
             
             
 
@@ -109,6 +124,22 @@
         </main>
     </div>
 
+    <!------------------------------ Scripts ------------------------------->
     @livewireScripts
+    <script>
+        // Função para esconder automaticamente as mensagens após alguns segundos
+        function hideMessages() {
+            setTimeout(function() {
+                document.querySelectorAll('.flash-message').forEach(function(element) {
+                    element.style.display = 'none';
+                });
+            }, 3000); //3 segundos
+        }
+
+        // Chame a função quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            hideMessages();
+        });
+    </script>
 </body>
 </html>
