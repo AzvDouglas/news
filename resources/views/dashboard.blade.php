@@ -44,21 +44,22 @@
             
             
             @if (session()->has('message'))
-            <div class="p-4 mb-6 text-center text-white bg-green-400 rounded-lg bg-opacity-900 flash-message">
+            <div class="fixed z-50 p-4 mx-auto font-bold text-white transform -translate-x-1/2 bg-yellow-600 rounded-lg left-1/2 bg-opacity-90 flash-message">
                 {{ session('message') }}
             </div>
             @endif
             @if(session('success'))
-            <div class="text-green-500 flash-message">
+            <div class="fixed z-50 p-4 mx-auto font-bold text-white transform -translate-x-1/2 bg-green-600 rounded-lg left-1/2 bg-opacity-90 flash-message">
                 {{ session('success') }}
             </div>
             @endif
-        
+            
             @if(session('error'))
-            <div class="text-red-500 flash-message">
+            <div class="fixed z-50 p-4 mx-auto font-bold text-white transform -translate-x-1/2 bg-red-600 rounded-lg left-1/2 bg-opacity-90 flash-message">
                 {{ session('error') }}
             </div>
             @endif
+            
             
             
 
