@@ -14,7 +14,6 @@ class CreateNewsForm extends Component
     public $titulo;
     public $descricao;
     public $imagem;
-    //public Noticia $noticia;
 
     protected $rules = [
         'titulo' => 'required|min:3',
@@ -28,6 +27,8 @@ class CreateNewsForm extends Component
         'descricao.min' => 'O campo descrição deve ter no mínimo :min caracteres.',
         'imagem' => 'Faça o upload de um arquivo de imagem válido por favor.'
     ];
+
+
 
     public function updated($propertyName)
     {
@@ -56,15 +57,18 @@ class CreateNewsForm extends Component
                 'imagem' => $imagemPath,
                 'user_id' => auth()->user()->id,
             ]);
-    
+            //limpar o formulário
+            $this->titulo = '';
+            $this->descricao = '';
+
             session()->flash('success', 'Notícia criada com sucesso.');
     
             return $this->redirect('/dashboard');
         } catch (\Exception $e) {
             session()->flash('error', 'Ocorreu um erro ao criar a notícia. Por favor, tente novamente.' . PHP_EOL . $e);
-                return $this->redirect('/dashboard');
         }
     }
+    
     
 
     public function render()

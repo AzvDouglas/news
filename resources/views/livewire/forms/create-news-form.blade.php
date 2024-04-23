@@ -1,5 +1,5 @@
 <div @keydown.escape.window="createNews = false"
-    class="fixed w-full max-w-xl p-6 overflow-hidden transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg top-1/2 left-1/2 dark:bg-gray-800">
+    class="fixed w-full max-w-xl p-6 transform -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg bg-slate-300 top-1/2 left-1/2 dark:bg-gray-800">
     <button type="button" @click="createNews = false" class="absolute top-0 right-0 p-3 text-red-500 focus:outline-none">
         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -10,23 +10,26 @@
             Cadastrar Notícia
         </h1>
     </div>    <!-- Formulário blurwire -->
-    <form wire:submit.prevent="save">
+    <form wire:submit="save">
         <!-- Título -->
         <div class="mb-4">
             <label for="titulo" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Título:</label>
-            <input type="text" wire:model.blur="titulo" id="titulo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+            <input type="text" wire:model.live="titulo"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
             @error('titulo') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
 
         <!-- Descrição -->
         <div class="mb-4">
             <label for="descricao" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Descrição:</label>
-            <textarea wire:model.blur="descricao" id="descricao" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300"></textarea>
+            <textarea wire:model.live="descricao" rows="4"
+                class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-green-500 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-300">
+            </textarea>
             @error('descricao') <span class="text-sm text-red-500">{{ $message }}</span> @enderror
         </div>
       
         <div class="mb-4"
-            x-data="{ fileUpload: true }">
+            x-data="{ fileUpload: false }">
             <div class="flex items-center mb-4">
                 <label for="uploadOption" class="mr-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Upload de aquivo de imagem:</label>
                 <div class="relative">
@@ -54,7 +57,7 @@
         
         <!-- Botões -->
         <div class="flex justify-between">
-			<button type="submit" class="px-6 py-2 text-sm font-bold bg-green-800 rounded-md shadow-sm text-green- hover:bg-green-700 hover:text-white focus:outline-none focus:shadow-outline-green active:bg-blue-800">
+			<button type="submit" class="px-6 py-2 text-sm font-bold text-green-200 bg-green-800 rounded-md shadow-sm hover:bg-green-700 hover:text-white focus:outline-none focus:shadow-outline-green active:bg-blue-800">
 				<i class="fa-classic fa-solid fa-floppy-disk"></i>
 				Salvar
 			</button>

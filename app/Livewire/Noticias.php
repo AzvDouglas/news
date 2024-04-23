@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Livewire\Form;
+namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
-use Illuminate\Http\UploadedFile;
-use App\Models\Noticia;
-class EditNewsForm extends Component
+use Illuminate\Support\Facades\Auth;
+use App\Models\Noticia as NoticiaModel;
+
+class Noticias extends Component
 {
-    use WithFileUploads;
-
-    protected $listeners = ['editNoticia' => 'edit'];
-
-    public Noticia $noticia;
-
-    public $noticiaId;
+    public $noticias;
+    public NoticiaModel $noticia;
+    public string $descricao;
+    public string $titulo = ' ';
+    public $imagem;
 
     protected $rules = [
         'titulo' => 'required',
@@ -30,22 +28,26 @@ class EditNewsForm extends Component
         'imagem' => 'Faça o upload de um arquivo de imagem válido por favor.'
     ];
 
-    public function mount(Noticia $noticiaEditada)
+    public function mount()
     {
-        //dd($noticiaEditada);
-        $this->titulo = $noticiaEditada->titulo;
-        $this->descricao = $noticiaEditada->descricao;
-        $this->imagem = $noticiaEditada->imagem;
+        $user = Auth::user();
+        $this->noticias = $user->noticias->sortByDesc('created_at');
+    }
+  
+    public function render()
+    {
+        return view('livewire.noticias');
     }
     
-    
+
+
     public function edit($noticiaId)
     {
-        dd($noticiaEditada);
-        $noticiaEditada = Noticia::find($noticiaId);
-        $this->mount($noticiaEditada);
-    }
-    
+        $noticiaEdit = NoticiaModel::find($noticiaId);
+        $this->titulo = $noticiaEdit->titulo;
+        $this->descricao = $noticiaEdit->descricao;
+        $this->imagem = $noticiaEdit->imagem;    }
+
     public function updated($propertyName)
     {
         if ($propertyName === 'imagem') {
@@ -54,10 +56,5 @@ class EditNewsForm extends Component
                 : 'sometimes|url';
         }
         $this->validateOnly($propertyName);
-    }
-
-    public function render()
-    {
-        return view('livewire.forms.edit-news-form');
     }
 }
